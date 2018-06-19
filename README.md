@@ -3,7 +3,7 @@ A tipping bot for 0xBTC
 
 
 ### TODO
-The tip bot will have an Eth account , a private key, and will have a lava account
+The tip bot will have an Eth account , a private key, and will use lavawallet 
 
 
 1. Integrate mongo, allow users to type a command to register an eth address with their discord address  (for accepting tips via name)
