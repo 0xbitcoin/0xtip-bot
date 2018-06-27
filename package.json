@@ -1,0 +1,27 @@
+{
+  "name": "0xtip-bot",
+  "version": "0.1.0",
+  "description": "A tipping bot for 0xBTC token",
+  "main": "app.js",
+  "scripts": {
+    "bot": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xbitcoin/0xtip-bot.git"
+  },
+  "keywords": [
+    "ethereum",
+    "token"
+  ],
+  "author": "0xbitcoin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/0xbitcoin/0xtip-bot/issues"
+  },
+  "homepage": "https://github.com/0xbitcoin/0xtip-bot#readme",
+  "dependencies": {
+    "discord.js": "^11.3.2"
+  }
+}
