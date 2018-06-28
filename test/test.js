@@ -49,10 +49,16 @@ var assert = require('assert');
 
     it('find acct', async function() {
 
-     var response= await commandHandler.findOneAccountByCombinedName('@Infernal_toast#5156')
+      var response= await commandHandler.findOneAccountByCombinedName('@Infernal_toast#5156')
 
-     console.log('find acct', response )
+      console.log('find acct', response )
       assert.ok( response  );
+
+      var response= await commandHandler.findOneAccountByCombinedName('@absfaf#1111')
+
+      console.log('find acct', response )
+      assert.equal( response , null  );
+
       return ;
 
     });
