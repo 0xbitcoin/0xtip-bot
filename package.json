@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "bot": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/0xbitcoin/0xtip-bot#readme",
   "dependencies": {
     "discord.js": "^11.3.2",
+    "mocha": "^5.2.0",
     "mongodb": "^3.1.0",
     "web3": "^1.0.0-beta.34",
     "web3-utils": "^1.0.0-beta.34"
