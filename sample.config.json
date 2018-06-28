@@ -1,5 +1,5 @@
 {
   "token":"aaa",
   "prefix":"/tipbot",
-  "relayURL":"http://relay.lavawallet.io:3000/"
+  "relayURL":"http://relay.lavawallet.io:3000"
 }
