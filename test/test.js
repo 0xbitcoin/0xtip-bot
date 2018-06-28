@@ -12,8 +12,8 @@ const discordInterface = require('../lib/discord-interface');
 
 const config = require("../config.json");
 
-
-
+var response;
+var messageChannel;
 
 var assert = require('assert');
 
@@ -22,14 +22,13 @@ var assert = require('assert');
 
 
 
-    it('init', async function() {
+    it('responds with help', async function() {
 
-      mongoInterface.init();
-      commandHandler.init(web3,mongoInterface);
+      await mongoInterface.init();
+      await commandHandler.init(web3,mongoInterface);
 
-      var response;
 
-       var message = {
+        messageChannel = {
          channel: {
            send: function(s){
              response = s;
@@ -39,7 +38,31 @@ var assert = require('assert');
        }
 
 
-      commandHandler.handle('help',[],message)
+      await commandHandler.handle('help',[],messageChannel)
+
+
+      assert.ok( response  );
+      return ;
+
+    });
+
+
+    it('find acct', async function() {
+
+     var response= await commandHandler.findOneAccountByCombinedName('@Infernal_toast#5156')
+
+     console.log('find acct', response )
+      assert.ok( response  );
+      return ;
+
+    });
+
+
+
+    it('can tip user', async function() {
+
+
+      commandHandler.handle('tipuser',[],messageChannel)
 
 
       assert.ok( response  );
