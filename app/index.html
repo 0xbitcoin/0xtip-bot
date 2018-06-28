@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
+      <%= require('html-loader!./assets/html/head.html') %>
+
+
+  </head>
+  <body>
+
+        <%= require('html-loader!./assets/html/navbar.html') %>
+
+
+<div class="page-container slate-theme " id="relay">
+
+      <section class="hero hex-overlay">
+        <div class="hero-body">
+          <div class="container has-text-centered" id='jumbotron'>
+            <h1 class="title  color-primary">
+                {{relayName}}
+            </h1>
+
+
+              <div class="whitespace-sm"></div>
+
+            <h2 class="subtitle color-white font-primary-title">
+              0xBTC Tip Bot
+            </h2>
+
+
+
+            <div  v-if="false"  class="loading-animation">
+                <div class="loader"></div>
+            </div>
+
+
+
+
+              <div class="whitespace-sm"></div>
+
+
+
+          </div>
+        </div>
+      </section>
+
+
+
+
+      <div id="stats" class="box background-secondary has-text-centered ">
+        <div class='title color-white'> Stats </div>
+
+        <table class='table table-dark zeroauto' v-cloak>
+          <thead>
+            <tr >
+              <td>   </td>
+              <td>   </td>
+
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td> SafeLow Gas Cost (gwei) </td>
+              <td> {{ relayData.ethGasSafeLow }}</td>
+            </tr>
+
+            <tr>
+              <td> Fast Gas Cost (gwei) </td>
+              <td> {{ relayData.ethGasFast }}</td>
+            </tr>
+
+            <tr>
+              <td> Highest Bid Price </td>
+              <td> {{ relayData.highestBidPrice }}</td>
+            </tr>
+
+            <tr>
+              <td> Target Profit Margin (%) </td>
+              <td> {{ relayData.profitMarginPercent }}</td>
+            </tr>
+
+            <tr>
+              <td> Target SafeLow Reward (0xBTC) </td>
+              <td> {{ relayData.targetSafeLowRewardTokens }}</td>
+            </tr>
+
+            <tr>
+              <td> Target Fast Reward (0xBTC) </td>
+              <td> {{ relayData.targetFastRewardTokens }}</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+
+      </div>
+
+
+
+      <div class="columns">
+      <div class= "column   is-half-desktop " style=" margin: 0 auto;">
+
+            <canvas id="hashgraph"></canvas>
+
+       </div>
+     </div>
+
+
+
+     <div id="queuedtx"  class="box background-secondary transaction-list " style="overflow-x:auto; min-height:480px;">
+       <div class='subtitle color-white'>Queued Lava Packets</div>
+       <table class='table table-dark zeroauto' v-cloak>
+
+         <thead>
+           <tr >
+             <td> From </td>
+             <td> To </td>
+             <td> Token Address </td>
+             <td> Token Amount </td>
+             <td> Relayer Reward </td>
+           </tr>
+         </thead>
+
+         <tbody>
+
+           <tr v-for="(item, index) in list"  v-bind:class="item.htmlClass">
+
+             <td>  {{ item.from  }} </td>
+             <td>  {{ item.to  }} </td>
+             <td>  {{ item.tokenAddress }} </td>
+             <td>  {{ item.tokenAmount  }} </td>
+             <td>  {{ item.relayerReward  }} </td>
+
+
+           </tr>
+
+         </tbody>
+       </table>
+
+     </div>
+
+     <div id="packetslist"  class="box background-secondary transaction-list " style="overflow-x:auto; min-height:480px;">
+       <div class='subtitle color-white'>Lava Packet History</div>
+       <table class='table table-dark zeroauto' v-cloak>
+
+         <thead>
+           <tr >
+             <td> From </td>
+             <td> To </td>
+             <td> Token Address </td>
+             <td> Token Amount </td>
+             <td> Relayer Reward </td>
+           </tr>
+         </thead>
+
+         <tbody>
+
+           <tr v-for="(item, index) in list"  v-bind:class="item.htmlClass">
+
+             <td>  {{ item.from  }} </td>
+             <td>  {{ item.to  }} </td>
+             <td>  {{ item.tokenAddress }} </td>
+             <td>  {{ item.tokenAmount  }} </td>
+             <td>  {{ item.relayerReward  }} </td>
+
+
+           </tr>
+
+         </tbody>
+       </table>
+
+     </div>
+
+
+
+
+
+
+
+      <div id="solutiontxlist"  class="box background-secondary transaction-list " style="overflow-x:auto; min-height:480px;">
+        <div class='subtitle'>Recent Solutions</div>
+        <table class='table table-dark zeroauto' v-cloak>
+
+          <thead>
+            <tr >
+              <td> Block </td>
+              <td> TxHash </td>
+              <td>   </td>
+              <td> Status </td>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr v-for="(item, index) in transactions.tx_list"  v-bind:class="item.htmlClass">
+              <td>  {{ item.block  }} </td>
+              <td>
+
+                <a v-bind:href='item.txURL' >
+                 {{ item.txHash  }}
+               </a>
+               </td>
+
+              <td class="tx-status-cell">  {{ item.formattedStatus}} </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+
+      <div id="transfertxlist" class="box background-secondary transaction-list  " style="overflow-x:auto; min-height:480px;">
+        <div class='subtitle'>Recent Transfers</div>
+        <table class='table table-dark zeroauto' v-cloak>
+
+          <thead>
+            <tr >
+              <td> Block </td>
+              <td> TxHash </td>
+              <td>   </td>
+              <td > Status </td>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr v-for="(item, index) in transactions.tx_list"  v-bind:class="item.htmlClass">
+              <td>  {{ item.block  }} </td>
+              <td>
+                  <a v-bind:href='item.txURL' >
+                 {{ item.txHash  }}
+               </a>
+               </td>
+
+              <td class="tx-status-cell">  {{ item.formattedStatus}} </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+
+
+
+      <div id="about" class="box background-secondary has-text-centered">
+
+        <div class="whitespace-sm"></div>
+
+        <div class='title'> Token Mining Pool </div>
+
+
+        <div class="whitespace-sm"></div>
+
+        <div class='subtitle '> Mine Ethereum tokens distributed using Proof of Work </div>
+
+
+
+
+        <div class="">
+
+        </div>
+
+        <div class="">
+
+
+          <p> Read more on <a href="https://reddit.com/r/tokenmining" target="_blank"> Reddit </a> </p>
+
+
+        </div>
+      </div>
+
+
+  </div>
+
+
+      <%= require('html-loader!./assets/html/footer.html') %>
+
+
+  </body>
+</html>
