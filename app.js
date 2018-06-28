@@ -18,11 +18,15 @@ const config = require("./config.json");
 
 async function init()
 {
-  mongoInterface.init();
-  commandHandler.init(web3,mongoInterface);
-  discordInterface.init(config,async function(command,args,message){
+  await mongoInterface.init();
+  await commandHandler.init(web3,mongoInterface);
+  await discordInterface.init(config,async function(command,args,message){
       await commandHandler.handle(command,args,message);
   });
+
+  commandHandler.registerActivityUpdater(function(message){
+    discordInterface.setActivity(message)
+  })
 
 }
 
