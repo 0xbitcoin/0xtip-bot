@@ -6,7 +6,8 @@
   "scripts": {
     "bot": "node app.js",
     "test": "mocha",
-    "dev": "webpack  && nodemon index.js "
+    "dev": "webpack  && nodemon index.js ",
+    "webdev": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
