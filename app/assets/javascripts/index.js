@@ -9,7 +9,9 @@ import Vue from 'vue'
 import AlertRenderer from './alert-renderer'
 
 
+import HomeRenderer from './home-renderer'
 
+var homeRenderer = new HomeRenderer();
 //var web3 = this.connectWeb3();
 
 
@@ -26,9 +28,11 @@ var navbar = new Vue({
 
 $(document).ready(function(){
 
-     
+  if($("#home").length > 0){
+  //  var web3 = ethHelper.init( alertRenderer);
 
-
+    homeRenderer.init();
+  }
 
 
 });

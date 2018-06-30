@@ -2,8 +2,8 @@
 const $ = require('jquery');
 import Vue from 'vue';
 
+var config = require('../../../config.js').config;
 
-const relayConfig = require('../../../relay.config').config
 var io = require('socket.io-client');
 
 
@@ -18,12 +18,23 @@ var stats;
 var packetslist;
 var queuedtxlist;
 
-export default class RelayRenderer {
+export default class HomeRenderer {
+
+
 
     init( )
     {
+      console.log("hello world")
 
       var self = this;
+
+      setInterval( function(){
+           self.update();
+      },5*1000);
+
+
+
+
 
       this.transactionListData = {
         txData: [ ]
@@ -101,7 +112,7 @@ export default class RelayRenderer {
          jumbotron = new Vue({
         el: '#jumbotron',
         data:{
-          relayName: relayConfig.name
+          relayName: config.name
          }
       });
 
